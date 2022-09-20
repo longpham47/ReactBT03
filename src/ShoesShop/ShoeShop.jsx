@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Modal from './Modal'
+import ProductList from './ProductList'
 
 export default class ShoeShop extends Component {
 
@@ -146,25 +148,17 @@ export default class ShoeShop extends Component {
 
 
 
-    renderDSSP = () => {
-        return this.arrayShoes.map((shoes) => {
-            return <div className="col-4 mb-2" key={`shoes-${shoes.id}`}>
-                <div className="card">
-                    <img className="card-img-top" src={shoes.image} alt="" />
-                    <div className="card-body">
-                        <h4 className="card-title">{shoes.name}</h4>
-                        <p className="card-text">{shoes.price}$</p>
-                        <button data-toggle="modal" data-target="#modelId" className='btn btn-info'>xem chi tiếc</button>
-                    </div>
-                </div>
 
-            </div>
 
+
+    showChiTiec =(shoes)=>{
+        this.setState({
+            chiTiecShoes:shoes
         })
+
+
+
     }
-
-
-
 
 
 
@@ -192,86 +186,8 @@ export default class ShoeShop extends Component {
 
                     </div>
                 </nav>
-                <div className="row py-5">
-                    {this.renderDSSP()}
-                </div>
-                <div>
-
-
-                    <div className="modal fade" id="modelId" tabIndex={-1} role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                        <div className="modal-dialog modal-lg" role="document">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title py-5" >Modal title</h5>
-                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div className="modal-body">
-                                    <table className="table">
-
-                                        <div>
-                                            <div className="row">
-                                                <div className="col-6">
-                                                    <h3>Hình Ảnh Sản Phẩm</h3>
-                                                    <img className='img-fluid' src={chiTiecShoes.image} alt="" />
-                                                </div>
-                                                <div className="col-6">
-                                                    <h2>Chi Tiếc Sản Phẩm</h2>
-
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>ID</td>
-                                                            <td>{chiTiecShoes.id}</td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Tên Sản Phẩm</td>
-                                                            <td>{chiTiecShoes.name}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Thương Hiệu</td>
-                                                            <td>{chiTiecShoes.alias}</td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Giá Tiền</td>
-                                                            <td>{chiTiecShoes.price} $</td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td>description</td>
-                                                            <td>{chiTiecShoes.description}</td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td>shortDescription</td>
-                                                            <td>{chiTiecShoes.shortDescription}</td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td>số lượng</td>
-                                                            <td>{chiTiecShoes.quantity}</td>
-
-                                                        </tr>
-
-
-                                                    </tbody>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </table>
-
-                                </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               <ProductList showChiTiec={this.showChiTiec} arrayShoes={this.arrayShoes}/>
+              <Modal chiTiecShoes={chiTiecShoes}/>
 
 
             </div>
